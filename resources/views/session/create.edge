@@ -1,0 +1,35 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'Login')
+
+  <div class="flex flex-col items-center">
+    <form class="bg-white w-3/5 shadow-md rounded px-8 pt-6 pb-8 mb-4" action="/login" method="POST">
+      @if(flashMessage('error'))
+        @component('components.alert', { color: 'danger' })
+          <p class="text-sm">{{ flashMessage('error') }}</p>
+        @endcomponent
+      @endif
+
+      <h1 class="text-x2 mb-16">Sign In</h1>
+
+      {{ csrfField() }}
+
+      {{-- Username Field --}}
+      <div class="mb-8">
+        @!component('components.label', { text: 'Username', related: 'username' })
+        @!component('components.input', { name: 'username', value: old('username'), required: true })
+      </div>
+
+      {{-- Password Field --}}
+      <div class="mb-8">
+        @!component('components.label', text = 'Password', related = 'password')
+        @!component('components.input', name = 'password', type = 'password', required = true)
+      </div>
+
+      <button class="bg-brand hover:bg-brand-dark text-white py-2 px-4 mt-4 rounded">
+        Login
+      </button>
+    </form>
+  </div>
+@endsection

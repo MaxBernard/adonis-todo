@@ -1,0 +1,43 @@
+@extends('layouts.app')
+
+@section('content')
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Dashboard
+							<a href="/posts/create" class="btn btn-primary btn-xs pull-right">New Post</a>
+						</h4>
+					</div>
+					<div class="panel-body">
+						@if (session('status'))
+							<div class="alert alert-success">
+								{{ session('status') }}
+							</div>
+						@endif
+						@if(count($posts) > 0)
+							<!--h3>Your Blog Posts</h3-->
+							@foreach($posts as $post)
+								<div class="container">
+									<div class="row">
+										<div class="col-md-1 col-sm-1"><img style="width:50%" src="/storage/cover_images/{{$post->cover_image}}"></div>
+										<!-- Post title -->
+										<div class="col-md-8 col-sm-8"><h4><a href="/posts/{{$post->id}}">{{$post->title}}</a></h4></div>
+										<!-- Post author -->
+										<!--div vertical-align: text-top>{{$post->user->name}}</div-->
+										<!-- Post date -->
+										<div vertical-align: text-bottom>{{$post->created_at}}</div>
+									</div>
+								</div>
+							@endforeach
+							{{ $posts->links() }}
+						@else
+							<h3>You have no posts yet</h3>
+						@endif
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection

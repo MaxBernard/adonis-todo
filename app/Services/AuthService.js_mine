@@ -1,0 +1,27 @@
+const InvalidAccessException = use('App/Exceptions/InvalidAccessException')
+const InvalidResourceException = use('App/Exceptions/InvalidResourceException')
+
+export default 
+class AuthService {
+  verifyPermission(resource, user) {
+    if (resource.user_id !== user.id) {
+      throw new InvalidAccessException
+    }  
+
+    if ( !resource ) {
+      throw new InvalidResourceException
+    }  
+  }
+}
+// export default AuthService
+
+// module.exports = AuthService
+/*
+export _default;get default() {
+    return this._default;
+  }
+set default(value) {
+    this._default = value;
+  }
+ AuthService
+*/
